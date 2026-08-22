@@ -30,3 +30,23 @@ def compute_quantum_hardware_penalty(current_batch_size, epsilon=0.016):
         return (current_batch_size ** -0.37) * epsilon * np.exp((simulated_steps - 20) / 8)
 
 print("[SUCCESS] Push 6 non-linear quantum penalty function appended to solution_push3.py!")
+
+def find_best_batch_size(maxm_limit=1024):
+    # Overwriting the legacy linear model with your active hardware noise equations
+    best_m = 1
+    min_cost = float('inf')
+    
+    for m in range(1, maxm_limit + 1):
+        # Your physical hardware baseline law: C(m) = Seff_dur / m + penalty(m)
+        simulated_dur = 4.2 + (m * 0.005) # Simulated base interpolation line
+        base_cost = (12.5 + simulated_dur) / m
+        hardware_penalty = compute_quantum_hardware_penalty(m)
+        
+        total_cost = base_cost + hardware_penalty
+        if total_cost < min_cost:
+            min_cost = total_cost
+            best_m = m
+            
+    return best_m
+
+print("[SUCCESS] Push 10 finalized batch evaluation engine integrated!")
