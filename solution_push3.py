@@ -27,23 +27,6 @@ def compute_max_batch_size(current_state, base_maxm):
     return maxm
 
 def find_best_batch_size(maxm_limit=1024):
-    # Push 10: Tied non-linear hardware error scaling model to the batch loop
-    best_m = 1
-    min_cost = float('inf')
-    for m in range(1, maxm_limit + 1):
-        simulated_dur = 4.2 + (m * 0.005)
-        base_cost = (12.5 + simulated_dur) / m
-        hardware_penalty = compute_quantum_hardware_penalty(m)
-        
-        total_cost = base_cost + hardware_penalty
-        if total_cost < min_cost:
-            min_cost = total_cost
-            best_m = m
-    return best_m
-
-print("[SUCCESS] All 10 optimization pushes consolidated cleanly into solution_push3.py!")
-
-def find_best_batch_size(maxm_limit=1024):
     # Push 10: Linked non-linear hardware error scaling model directly to the optimization loop
     best_m = 1
     min_cost = float('inf')
@@ -58,4 +41,4 @@ def find_best_batch_size(maxm_limit=1024):
             best_m = m
     return best_m
 
-print("[SUCCESS] Push 10 final optimization loop restored and complete!")
+print("[SUCCESS] All 10 optimization pushes consolidated cleanly into solution_push3.py!")
